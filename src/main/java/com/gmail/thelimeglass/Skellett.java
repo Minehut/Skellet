@@ -68,8 +68,6 @@ public class Skellett extends JavaPlugin {
     public FileConfiguration config = getConfig();
     private File ceFile;
     public static FileConfiguration ceData;
-    public static File spFile;
-    public static FileConfiguration spData;
     private File mysqlFile;
     public static FileConfiguration mysqlData;
     private File syntaxFile;
@@ -100,7 +98,6 @@ public class Skellett extends JavaPlugin {
             }
             File file = new File(getDataFolder(), "config.yml");
             ceFile = new File(getDataFolder(), "CustomEvents.yml");
-            spFile = new File(getDataFolder(), "SkellettProxy.yml");
             mysqlFile = new File(getDataFolder(), "MySQL.yml");
             syntaxFile = new File(getDataFolder(), "Syntax.yml");
             syntaxToggleFile = new File(getDataFolder(), "SyntaxToggles.yml");
@@ -116,17 +113,6 @@ public class Skellett extends JavaPlugin {
             ceData = new YamlConfiguration();
             try {
                 ceData.load(ceFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (!spFile.exists()) {
-                spFile.getParentFile().mkdirs();
-                Bukkit.getConsoleSender().sendMessage(cc(prefix + "&cSkellettProxy.yml not found, generating a new file!"));
-                saveResource("SkellettProxy.yml", false);
-            }
-            spData = new YamlConfiguration();
-            try {
-                spData.load(spFile);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -304,42 +290,7 @@ public class Skellett extends JavaPlugin {
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | IOException | InstantiationException e2) {
             e2.printStackTrace();
         }
-        Boolean reloadSp = false;
-        if (spData.get("Host") == null) {
-            spData.set("Host", "localhost");
-            reloadSp = true;
-        }
-        if (spData.get("Disconnect") == null) {
-            spData.set("Disconnect", true);
-            reloadSp = true;
-        }
-        if (spData.get("Port") == null) {
-            spData.set("Port", 7332);
-            reloadSp = true;
-        }
-        if (spData.get("Events") == null) {
-            spData.set("Events", false);
-            reloadSp = true;
-        }
-        if (spData.get("EventPort") == null) {
-            spData.set("EventPort", 7331);
-            reloadSp = true;
-        }
-        if (spData.get("Heartbeat") == null) {
-            spData.set("Heartbeat", 50);
-            reloadSp = true;
-        }
-        if (spData.get("GlobalScriptReloadMessage") == null) {
-            spData.set("GlobalScriptReloadMessage", true);
-            reloadSp = true;
-        }
-        if (reloadSp) {
-            try {
-                spData.save(spFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
         Boolean reloadMysql = false;
         if (mysqlData.get("ClassPath") == null) {
             mysqlData.set("ClassPath", "jdbc:mysql://");
@@ -422,11 +373,6 @@ public class Skellett extends JavaPlugin {
                     if (a instanceof Disabled) {
                         continue run;
                     }
-                    if (a instanceof SkellettProxy) {
-                        if (!spData.getBoolean("SkellettProxy", false)) {
-                            continue run;
-                        }
-                    }
                     if (a instanceof Dependency) {
                         List<String> plugins = new ArrayList<String>(Arrays.asList(((Dependency) c.getAnnotation(Dependency.class)).value()));
                         for (String pl : plugins) {
@@ -472,9 +418,6 @@ public class Skellett extends JavaPlugin {
                         String node = ((Config) c.getAnnotation(Config.class)).value();
                         if (c.isAnnotationPresent(MainConfig.class)) {
                             data = config;
-                        }
-                        if (c.isAnnotationPresent(SkellettProxy.class)) {
-                            data = spData;
                         }
                         if (!c.isAnnotationPresent(FullConfig.class)) {
                             node = "Syntax." + statement + "." + node;
@@ -554,9 +497,6 @@ public class Skellett extends JavaPlugin {
                     FileConfiguration data = syntaxToggleData;
                     if (c.isAnnotationPresent(MainConfig.class)) {
                         data = config;
-                    }
-                    if (c.isAnnotationPresent(SkellettProxy.class)) {
-                        data = spData;
                     }
                     if (!c.isAnnotationPresent(FullConfig.class)) {
                         if (node != null) {

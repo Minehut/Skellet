@@ -12,8 +12,6 @@ import ch.njol.skript.registrations.EventValues;
 import ch.njol.skript.util.Getter;
 import com.gmail.thelimeglass.Events.EvtPacket;
 import com.gmail.thelimeglass.Expressions.*;
-import com.gmail.thelimeglass.SkellettProxy.Events.EvtBungeecordDisconnect;
-import com.gmail.thelimeglass.SkellettProxy.Events.EvtBungeecordServerSwitch;
 import com.gmail.thelimeglass.Utils.EnumClassInfo;
 import com.gmail.thelimeglass.Utils.ExprNewMaterial;
 import net.citizensnpcs.api.event.*;
@@ -484,67 +482,6 @@ public class Register {
                 }
             }, 0);
         }
-        if (Skellett.spData.getBoolean("Events", false)) {
-            registerEvent(EvtBungeecordDisconnect.class, "(skellett[ ][(cord|proxy)]|bungee[ ][cord]) player (disconnect|leave)");
-            EventValues.registerEventValue(EvtBungeecordDisconnect.class, String.class, new Getter<String, EvtBungeecordDisconnect>() {
-                @Override
-                public String get(EvtBungeecordDisconnect e) {
-                    return e.getPlayerName();
-                }
-            }, 0);
-            EventValues.registerEventValue(EvtBungeecordDisconnect.class, UUID.class, new Getter<UUID, EvtBungeecordDisconnect>() {
-                @Override
-                public UUID get(EvtBungeecordDisconnect e) {
-                    return e.getUUID();
-                }
-            }, 0);
-            EventValues.registerEventValue(EvtBungeecordDisconnect.class, OfflinePlayer.class, new Getter<OfflinePlayer, EvtBungeecordDisconnect>() {
-                @Override
-                public OfflinePlayer get(EvtBungeecordDisconnect e) {
-                    return e.getOfflinePlayer();
-                }
-            }, 0);
-            registerEvent(EvtBungeecordServerSwitch.class, "(skellett[ ][(cord|proxy)]|bungee[ ][cord]) [player] (switch server[s]|server[s] switch)");
-            EventValues.registerEventValue(EvtBungeecordServerSwitch.class, String.class, new Getter<String, EvtBungeecordServerSwitch>() {
-                @Override
-                public String get(EvtBungeecordServerSwitch e) {
-                    return e.getPlayerName();
-                }
-            }, 0);
-            EventValues.registerEventValue(EvtBungeecordServerSwitch.class, UUID.class, new Getter<UUID, EvtBungeecordServerSwitch>() {
-                @Override
-                public UUID get(EvtBungeecordServerSwitch e) {
-                    return e.getUUID();
-                }
-            }, 0);
-            EventValues.registerEventValue(EvtBungeecordServerSwitch.class, OfflinePlayer.class, new Getter<OfflinePlayer, EvtBungeecordServerSwitch>() {
-                @Override
-                public OfflinePlayer get(EvtBungeecordServerSwitch e) {
-                    return e.getOfflinePlayer();
-                }
-            }, 0);
-			/*registerEvent(EvtBungeecordPlayerChat.class, "(skellett[ ][(cord|proxy)]|bungee[ ][cord]) [player] chat");
-			EventValues.registerEventValue(EvtBungeecordPlayerChat.class, Player.class, new Getter<Player, EvtBungeecordPlayerChat>() {
-				@Override
-				public Player get(EvtBungeecordPlayerChat e) {
-					return e.getPlayer();
-				}
-			}, 0);
-			EventValues.registerEventValue(EvtBungeecordPlayerChat.class, String.class, new Getter<String, EvtBungeecordPlayerChat>() {
-				@Override
-				public String get(EvtBungeecordPlayerChat e) {
-					return e.getMessage();
-				}
-			}, 0);
-			registerEvent(EvtBungeecordDisconnect.class, "(skellett[ ][(cord|proxy)]|bungee[ ][cord]) player (connect|join)");
-			EventValues.registerEventValue(EvtBungeecordConnect.class, OfflinePlayer.class, new Getter<OfflinePlayer, EvtBungeecordConnect>() {
-				@Override
-				public OfflinePlayer get(EvtBungeecordConnect e) {
-					return e.getPlayer();
-				}
-			}, 0);*/
-            //TODO: Finish this above
-        }
         if (Skellett.syntaxToggleData.getBoolean("Syntax.Events.SpawnerSpawn")) {
             registerEvent(SpawnerSpawnEvent.class, "spawner spawn");
             EventValues.registerEventValue(SpawnerSpawnEvent.class, Block.class, new Getter<Block, SpawnerSpawnEvent>() {
@@ -943,18 +880,6 @@ public class Register {
     }
 
     public static void metrics(Metrics metrics) {
-        metrics.addCustomChart(new Metrics.SimplePie("using_skellettproxy") {
-            @Override
-            public String getValue() {
-                return Skellett.spData.getBoolean("SkellettProxy", false) ? "true" : "false";
-            }
-        });
-        metrics.addCustomChart(new Metrics.SimplePie("using_skellettproxy_events") {
-            @Override
-            public String getValue() {
-                return Skellett.spData.getBoolean("Events", false) ? "true" : "false";
-            }
-        });
         metrics.addCustomChart(new Metrics.SimplePie("skript_version") {
             @Override
             public String getValue() {

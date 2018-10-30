@@ -1,7 +1,7 @@
 name: Skellett
 author: LimeGlass
 description: The addon with the beast name
-version: 1.9.4a
+version: ${project.version}
 website: https://forums.skunity.com/resources/skellett-the-addon-with-a-beast-name.24/
 main: com.gmail.thelimeglass.Skellett
 depend: [Skript]
