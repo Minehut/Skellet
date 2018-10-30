@@ -1,0 +1,42 @@
+package com.gmail.thelimeglass.Regenerator;
+
+import ch.njol.skript.lang.Expression;
+import ch.njol.skript.lang.ExpressionType;
+import ch.njol.skript.lang.SkriptParser.ParseResult;
+import ch.njol.skript.lang.util.SimpleExpression;
+import ch.njol.util.Kleenean;
+import com.gmail.thelimeglass.Utils.Annotations.Config;
+import com.gmail.thelimeglass.Utils.Annotations.FullConfig;
+import com.gmail.thelimeglass.Utils.Annotations.PropertyType;
+import com.gmail.thelimeglass.Utils.Annotations.Syntax;
+import org.bukkit.event.Event;
+
+import javax.annotation.Nullable;
+
+@Syntax("[(the|all)] [of] [the] [skellett] regenerator[s] [ids]")
+@Config("Main.Regenerator")
+@FullConfig
+@PropertyType(ExpressionType.COMBINED)
+public class ExprRegenerators extends SimpleExpression<String> {
+
+    public Class<? extends String> getReturnType() {
+        return String.class;
+    }
+
+    public boolean isSingle() {
+        return false;
+    }
+
+    public boolean init(Expression<?>[] e, int matchedPattern, Kleenean isDelayed, ParseResult parser) {
+        return true;
+    }
+
+    public String toString(@Nullable Event arg0, boolean arg1) {
+        return "[(the|all)] [of] [the] [skellett] regenerator [ids]";
+    }
+
+    @Nullable
+    protected String[] get(Event e) {
+        return RegeneratorManager.getAll();
+    }
+}
