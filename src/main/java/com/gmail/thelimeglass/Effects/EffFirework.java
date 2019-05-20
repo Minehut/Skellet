@@ -51,10 +51,6 @@ public class EffFirework extends Effect {
     protected void execute(Event e) {
         int r = random.nextInt(17) + 1;
         Color finalColour = getColor(r);
-        if (colour != null) {
-            ch.njol.skript.util.Color c = ch.njol.skript.util.Color.byName(colour.getSingle(e).toString());
-            finalColour = c.getBukkitColor();
-        }
         FireworkEffect.Type t = randomType();
         if (type != null) {
             t = FireworkEffect.Type.valueOf(type.getSingle(e).replace("\"", "").trim().replace(" ", "_").toUpperCase());
@@ -72,12 +68,12 @@ public class EffFirework extends Effect {
                     if (type == null) {
                         FireworkEffect.Type randomType = randomType();
                         meta.addEffect(FireworkEffect.builder()
-                                .withColor(ch.njol.skript.util.Color.byName(s.toString()).getBukkitColor())
+                                //.withColor(ch.njol.skript.util.Color.as(s.toString()).getBukkitColor())
                                 .with(randomType)
                                 .build());
                     } else {
                         meta.addEffect(FireworkEffect.builder()
-                                .withColor(ch.njol.skript.util.Color.byName(s.toString()).getBukkitColor())
+                                //.withColor(ch.njol.skript.util.Color.byName(s.toString()).getBukkitColor())
                                 .with(t)
                                 .build());
                     }

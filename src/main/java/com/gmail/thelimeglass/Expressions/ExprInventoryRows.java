@@ -61,7 +61,7 @@ public class ExprInventoryRows extends SimpleExpression<Number> {
             Number rows = delta[0] == null ? inventory.getSingle(e).getSize() / 9 : (Number) delta[0];
             if (inventory.getSingle(e).getType() == InventoryType.CHEST || inventory.getSingle(e).getType() == InventoryType.ENDER_CHEST || inventory.getSingle(e).getType() == InventoryType.SHULKER_BOX || inventory.getSingle(e).getType() == InventoryType.PLAYER) {
                 if (rows.intValue() >= 1) {
-                    Inventory copy = Bukkit.createInventory(inventory.getSingle(e).getHolder(), rows.intValue() * 9, inventory.getSingle(e).getName());
+                    Inventory copy = Bukkit.createInventory(inventory.getSingle(e).getHolder(), rows.intValue() * 9); // 1.14 - should have title but no way to get it from here.
                     for (HumanEntity human : new ArrayList<>(inventory.getSingle(e).getViewers())) {
                         human.openInventory(copy);
                     }

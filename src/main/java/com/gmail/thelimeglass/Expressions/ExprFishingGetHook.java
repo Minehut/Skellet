@@ -11,7 +11,7 @@ import com.gmail.thelimeglass.Utils.Annotations.Config;
 import com.gmail.thelimeglass.Utils.Annotations.FullConfig;
 import com.gmail.thelimeglass.Utils.Annotations.PropertyType;
 import com.gmail.thelimeglass.Utils.Annotations.Syntax;
-import org.bukkit.entity.Fish;
+import org.bukkit.entity.FishHook;
 import org.bukkit.event.Event;
 import org.bukkit.event.player.PlayerFishEvent;
 
@@ -22,10 +22,10 @@ import javax.annotation.Nullable;
 @FullConfig
 @PropertyType(ExpressionType.SIMPLE)
 @SuppressWarnings("deprecation")
-public class ExprFishingGetHook extends SimpleExpression<Fish> {
+public class ExprFishingGetHook extends SimpleExpression<FishHook> {
 
-    public Class<? extends Fish> getReturnType() {
-        return Fish.class;
+    public Class<? extends FishHook> getReturnType() {
+        return FishHook.class;
     }
 
     public boolean isSingle() {
@@ -45,7 +45,7 @@ public class ExprFishingGetHook extends SimpleExpression<Fish> {
     }
 
     @Nullable
-    protected Fish[] get(Event e) {
-        return new Fish[]{((PlayerFishEvent) e).getHook()};
+    protected FishHook[] get(Event e) {
+        return new FishHook[]{((PlayerFishEvent) e).getHook()};
     }
 }

@@ -61,7 +61,7 @@ public class EffApplyBetterPotion extends Effect {
                 } else if (particles != null && colour == null) {
                     p = new PotionEffect(potion.getSingle(e), 300, tier.getSingle(e).intValue(), ambient.getSingle(e), particles.getSingle(e));
                 } else if (particles != null && colour != null) {
-                    p = new PotionEffect(potion.getSingle(e), 300, tier.getSingle(e).intValue(), ambient.getSingle(e), particles.getSingle(e), colour.getSingle(e).getBukkitColor());
+                    p = new PotionEffect(potion.getSingle(e), 300, tier.getSingle(e).intValue(), ambient.getSingle(e), particles.getSingle(e));
                 }
             } else if (time != null && tier != null && ambient != null) {
                 Number ticks = Skellett.getTicks(time.getSingle(e));
@@ -70,7 +70,7 @@ public class EffApplyBetterPotion extends Effect {
                 } else if (particles != null && colour == null) {
                     p = new PotionEffect(potion.getSingle(e), ticks.intValue(), tier.getSingle(e).intValue(), ambient.getSingle(e), particles.getSingle(e));
                 } else if (particles != null && colour != null) {
-                    p = new PotionEffect(potion.getSingle(e), ticks.intValue(), tier.getSingle(e).intValue(), ambient.getSingle(e), particles.getSingle(e), colour.getSingle(e).getBukkitColor());
+                    p = new PotionEffect(potion.getSingle(e), ticks.intValue(), tier.getSingle(e).intValue(), ambient.getSingle(e), particles.getSingle(e));
                 }
             }
             for (LivingEntity entity : entities.getAll(e)) {

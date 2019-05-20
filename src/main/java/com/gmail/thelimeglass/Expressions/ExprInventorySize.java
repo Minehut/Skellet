@@ -60,7 +60,7 @@ public class ExprInventorySize extends SimpleExpression<Number> {
         if (inventory != null) {
             Number rows = delta[0] == null ? inventory.getSingle(e).getSize() : (Number) delta[0];
             if (inventory.getSingle(e).getType() == InventoryType.CHEST) {
-                Inventory copy = Bukkit.createInventory(inventory.getSingle(e).getHolder(), rows.intValue(), inventory.getSingle(e).getName());
+                Inventory copy = Bukkit.createInventory(inventory.getSingle(e).getHolder(), rows.intValue()); // 1.14 - should have title but can't get from here
                 for (HumanEntity human : new ArrayList<>(inventory.getSingle(e).getViewers())) {
                     human.openInventory(copy);
                 }

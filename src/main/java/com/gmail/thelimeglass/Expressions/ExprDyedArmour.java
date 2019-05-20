@@ -54,7 +54,7 @@ public class ExprDyedArmour extends SimpleExpression<ItemStack> {
         ItemStack itemstack = item.getSingle(e);
         if (itemstack.getType() == Material.LEATHER_HELMET || itemstack.getType() == Material.LEATHER_CHESTPLATE || itemstack.getType() == Material.LEATHER_LEGGINGS || itemstack.getType() == Material.LEATHER_BOOTS) {
             LeatherArmorMeta armour = (LeatherArmorMeta) itemstack.getItemMeta();
-            armour.setColor(colour.getSingle(e).getBukkitColor());
+            armour.setColor(colour.getSingle(e).asBukkitColor());
             itemstack.setItemMeta((ItemMeta) armour);
         }
         return new ItemStack[]{itemstack};

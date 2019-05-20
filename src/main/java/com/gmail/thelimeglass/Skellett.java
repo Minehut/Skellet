@@ -10,10 +10,8 @@ import ch.njol.skript.registrations.Classes;
 import ch.njol.skript.util.Timespan;
 import com.gmail.thelimeglass.BossBars.*;
 import com.gmail.thelimeglass.Conditions.CondClientTimeRelative;
-import com.gmail.thelimeglass.Conditions.CondFileExists;
 import com.gmail.thelimeglass.Conditions.CondIsWhitelisted;
 import com.gmail.thelimeglass.Effects.EffFirework;
-import com.gmail.thelimeglass.Expressions.ExprYaml;
 import com.gmail.thelimeglass.Maps.SkellettMapRenderer;
 import com.gmail.thelimeglass.MySQL.*;
 import com.gmail.thelimeglass.ProtocolSupport.ExprBlockRemapperItemType;
@@ -273,12 +271,7 @@ public class Skellett extends JavaPlugin {
                 }
             }
         }
-        if (getServer().getPluginManager().getPlugin("SkQuery") == null) {
-            if (syntaxToggleData.getBoolean("Main.Yaml")) {
-                Skript.registerExpression(ExprYaml.class, Object.class, ExpressionType.SIMPLE, "[skellett] (file|y[a]ml) [file] (1�value|2�node[s]|3�node[s with] keys|4�list) %string% (in|at|from) [file] %string%");
-            }
-        }
-        Skript.registerCondition(CondFileExists.class, "[skellett] [file] exist(s|ence) [(at|of)] %string% [is %-boolean%]");
+
         Skript.registerEffect(EffFirework.class, "[skellett] (launch|deploy) [%-strings%] firework[s] at %locations% [with] (duration|timed|time) %number% [colo[u]r[ed] (%-strings%|%-color%)]");
         Skript.registerEvent("[on] entity sho[o]t:", SimpleEvent.class, EntityShootBowEvent.class, "[on] entity sho[o]t");
         Register.metrics(new Metrics(this));

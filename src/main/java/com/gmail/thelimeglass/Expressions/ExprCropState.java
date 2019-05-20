@@ -45,7 +45,7 @@ public class ExprCropState extends SimpleExpression<String> {
     @SuppressWarnings("deprecation")
     @Nullable
     protected String[] get(Event e) {
-        if (block.getSingle(e).getType().equals(Material.CROPS)) {
+        if (block.getSingle(e).getType().equals(Material.LEGACY_CROPS)) {
             if (block.getSingle(e).getData() == CropState.RIPE.getData()) {
                 return new String[]{"RIPE"};
             } else if (block.getSingle(e).getData() == CropState.GERMINATED.getData()) {

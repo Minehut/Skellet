@@ -85,7 +85,7 @@ public class BlockConstructor {
                     if (chars.containsKey(character)) {
                         block.setType(chars.get(character));
                         if (effect) {
-                            block.getWorld().playEffect(block.getLocation(), Effect.STEP_SOUND, block.getTypeId());
+                            block.getWorld().playEffect(block.getLocation(), Effect.STEP_SOUND, block.getType());
                         }
                     }
                 }

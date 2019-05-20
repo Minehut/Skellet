@@ -38,7 +38,7 @@ public class EffAddPage extends Effect {
     @Override
     protected void execute(Event e) {
         if (book == null) return;
-        if (book.getSingle(e).getType() == Material.BOOK_AND_QUILL || book.getSingle(e).getType() == Material.WRITTEN_BOOK) {
+        if (book.getSingle(e).getType() == Material.WRITABLE_BOOK || book.getSingle(e).getType() == Material.WRITTEN_BOOK) {
             BookMeta bookMeta = (BookMeta) book.getSingle(e).getItemMeta();
             if (string != null) {
                 bookMeta.addPage(string.getSingle(e));

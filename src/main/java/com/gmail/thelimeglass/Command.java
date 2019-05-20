@@ -55,16 +55,16 @@ public class Command implements CommandExecutor, Listener {
         if (e.getClick() == ClickType.CREATIVE || inv == null || player == null) {
             return;
         }
-        if (inv.getTitle().equals(Skellett.cc("              &2&l&nSkellett"))) {
+        if (e.getView().getTitle().equals(Skellett.cc("              &2&l&nSkellett"))) {
             e.setCancelled(true);
             if (inv.getSize() == 27) {
                 if (inv.getSize() <= 27) {
-                    if (e.getCurrentItem().getType() == Material.STAINED_GLASS_PANE && e.getCurrentItem().getData().getData() == 5) {
-                        e.setCurrentItem(new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 13));
-                    } else if (e.getCurrentItem().getType() == Material.STAINED_GLASS_PANE && e.getCurrentItem().getData().getData() == 13) {
-                        e.setCurrentItem(new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 15));
-                    } else if (e.getCurrentItem().getType() == Material.STAINED_GLASS_PANE && e.getCurrentItem().getData().getData() == 15) {
-                        e.setCurrentItem(new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 5));
+                    if (e.getCurrentItem().getType() == Material.BLACK_STAINED_GLASS_PANE && e.getCurrentItem().getData().getData() == 5) {
+                        e.setCurrentItem(new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1, (byte) 13));
+                    } else if (e.getCurrentItem().getType() == Material.BLACK_STAINED_GLASS_PANE && e.getCurrentItem().getData().getData() == 13) {
+                        e.setCurrentItem(new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1, (byte) 15));
+                    } else if (e.getCurrentItem().getType() == Material.BLACK_STAINED_GLASS_PANE && e.getCurrentItem().getData().getData() == 15) {
+                        e.setCurrentItem(new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1, (byte) 5));
                     }
                 }
                 StringJoiner joiner = new StringJoiner("");
@@ -73,7 +73,7 @@ public class Command implements CommandExecutor, Listener {
                         joiner.add("" + item.getData().getData());
                     }
                     if (joiner.toString().equals("1315515515515131501550515015131551551551513")) {
-                        ItemStack pane = new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 0);
+                        ItemStack pane = new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1, (byte) 0);
                         for (int i = 0; i < 4; i++) {
                             Integer slot = i;
                             Bukkit.getScheduler().scheduleSyncDelayedTask(Skellett.instance, new Runnable() {
@@ -85,7 +85,7 @@ public class Command implements CommandExecutor, Listener {
                                 }
                             }, i * 2);
                         }
-                        ItemStack pane2 = new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 10);
+                        ItemStack pane2 = new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1, (byte) 10);
                         for (int i = 1; i < 5; i++) {
                             Integer slot = 9 - i;
                             Bukkit.getScheduler().scheduleSyncDelayedTask(Skellett.instance, new Runnable() {
@@ -97,7 +97,7 @@ public class Command implements CommandExecutor, Listener {
                                 }
                             }, i * 2);
                         }
-                        ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
+                        ItemStack head = new ItemStack(Material.SKELETON_SKULL, 1, (byte) 3);
                         SkullMeta headMeta = (SkullMeta) head.getItemMeta();
                         headMeta.setOwner(player.getName());
                         headMeta.setDisplayName(Skellett.cc("&6&l" + player.getName()));
@@ -125,7 +125,7 @@ public class Command implements CommandExecutor, Listener {
                     }
                     player.openInventory(makeSyntaxMenu(51 * page));
                 } else {
-                    if (e.getCurrentItem().getType() == Material.STAINED_GLASS_PANE) {
+                    if (e.getCurrentItem().getType() == Material.BLACK_STAINED_GLASS_PANE) {
                         ItemMeta clickedMeta = e.getCurrentItem().getItemMeta();
                         String[] data = clickedMeta.getDisplayName().split(" ");
                         String node = "Syntax." + ChatColor.stripColor(data[0]) + "." + ChatColor.stripColor(data[1]);
@@ -141,13 +141,13 @@ public class Command implements CommandExecutor, Listener {
                         }
                         String value = Skellett.syntaxToggleData.getBoolean(node) ? " &aTrue" : " &cFalse";
                         if (Skellett.syntaxToggleData.getBoolean(node)) {
-                            ItemStack finalPane1 = new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 5);
+                            ItemStack finalPane1 = new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1, (byte) 5);
                             ItemMeta finalPane1Meta = finalPane1.getItemMeta();
                             finalPane1Meta.setDisplayName(Skellett.cc(data[0] + " " + data[1] + value));
                             finalPane1.setItemMeta(finalPane1Meta);
                             inv.setItem(e.getSlot(), finalPane1);
                         } else {
-                            ItemStack finalPane1 = new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 14);
+                            ItemStack finalPane1 = new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1, (byte) 14);
                             ItemMeta finalPane1Meta = finalPane1.getItemMeta();
                             finalPane1Meta.setDisplayName(Skellett.cc(data[0] + " " + data[1] + value));
                             finalPane1.setItemMeta(finalPane1Meta);
@@ -165,9 +165,9 @@ public class Command implements CommandExecutor, Listener {
         List<Number> nums = Arrays.asList(0, 2, 3, 5, 6, 8, 18, 20, 21, 23, 24, 26);
         for (int i = 0; i < inv.getSize(); i++) {
             if (nums.contains(i)) {
-                inv.setItem(i, new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 5));
+                inv.setItem(i, new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1, (byte) 5));
             } else {
-                inv.setItem(i, new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 13));
+                inv.setItem(i, new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1, (byte) 13));
             }
         }
         ItemStack version = new ItemStack(Material.PAPER, 1);
@@ -176,13 +176,13 @@ public class Command implements CommandExecutor, Listener {
         versionMeta.setLore(Arrays.asList(Skellett.cc("&f" + Skellett.plugin.getDescription().getVersion())));
         version.setItemMeta(versionMeta);
         inv.setItem(10, version);
-        ItemStack command = new ItemStack(Material.POWERED_MINECART, 1);
+        ItemStack command = new ItemStack(Material.MINECART, 1);
         ItemMeta commandMeta = command.getItemMeta();
         commandMeta.setDisplayName(Skellett.cc("&a&lSyntax toggles"));
         commandMeta.setLore(Arrays.asList(Skellett.cc("&fEnable/Disable syntax values"), "", Skellett.cc("&cRestart server for changes to apply")));
         command.setItemMeta(commandMeta);
         inv.setItem(13, command);
-        ItemStack config = new ItemStack(Material.STORAGE_MINECART, 1);
+        ItemStack config = new ItemStack(Material.CHEST_MINECART, 1);
         ItemMeta configMeta = config.getItemMeta();
         configMeta.setDisplayName(Skellett.cc("&a&lConfig toggles"));
         configMeta.setLore(Arrays.asList(Skellett.cc("&fEnable/Disable config values"), "", Skellett.cc("&cRestart server for some changes to apply"), Skellett.cc("&4Coming soon")));
@@ -210,13 +210,13 @@ public class Command implements CommandExecutor, Listener {
                         continue in;
                     }
                     if (Skellett.syntaxToggleData.getBoolean("Syntax." + type + "." + node)) {
-                        ItemStack trueItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 5);
+                        ItemStack trueItem = new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1, (byte) 5);
                         ItemMeta trueItemMeta = trueItem.getItemMeta();
                         trueItemMeta.setDisplayName(Skellett.cc("&f" + type + " &6" + node + " &aTrue"));
                         trueItem.setItemMeta(trueItemMeta);
                         syntax.setItem(slot, trueItem);
                     } else {
-                        ItemStack trueItem = new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 14);
+                        ItemStack trueItem = new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1, (byte) 14);
                         ItemMeta trueItemMeta = trueItem.getItemMeta();
                         trueItemMeta.setDisplayName(Skellett.cc("&f" + type + " &6" + node + " &cFalse"));
                         trueItem.setItemMeta(trueItemMeta);
@@ -232,7 +232,7 @@ public class Command implements CommandExecutor, Listener {
                 }
             }
         }
-        ItemStack next = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
+        ItemStack next = new ItemStack(Material.SKELETON_SKULL, 1, (byte) 3);
         SkullMeta nextMeta = (SkullMeta) next.getItemMeta();
         nextMeta.setOwner("MHF_ArrowRight");
         nextMeta.setDisplayName(Skellett.cc("&6&lNext &r&6(&l" + (page + 2) + "&r&6)"));
@@ -244,7 +244,7 @@ public class Command implements CommandExecutor, Listener {
         backMenu.setItemMeta(backMenuMeta);
         syntax.setItem(49, backMenu);
         if (page > 0) {
-            ItemStack back = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
+            ItemStack back = new ItemStack(Material.SKELETON_SKULL, 1, (byte) 3);
             SkullMeta backMeta = (SkullMeta) back.getItemMeta();
             backMeta.setOwner("MHF_ArrowLeft");
             backMeta.setDisplayName(Skellett.cc("&c&lBack &r&c(&l" + page + "&r&c)"));

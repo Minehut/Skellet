@@ -39,9 +39,9 @@ public class EffLeashBlock extends Effect {
     protected void execute(Event e) {
         Entity hitch = null;
         if (block.getSingle(e) == null) return;
-        if (block.getSingle(e).getType() != Material.FENCE) {
+        if (block.getSingle(e).getType() != Material.LEGACY_FENCE) {
             Material type = block.getSingle(e).getType();
-            block.getSingle(e).setType(Material.FENCE);
+            block.getSingle(e).setType(Material.LEGACY_FENCE);
             hitch = block.getSingle(e).getLocation().getWorld().spawn(block.getSingle(e).getLocation(), LeashHitch.class);
             block.getSingle(e).setType(type);
         } else {
