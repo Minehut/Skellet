@@ -45,8 +45,9 @@ public class PacketListener implements Listener {
         ChannelDuplexHandler channelDuplexHandler = new ChannelDuplexHandler() {
             @Override
             public void channelRead(ChannelHandlerContext context, Object packet) throws Exception {
-                EvtPacket EvtPacket = new EvtPacket(player, new PacketWrapper(packet));
-                Bukkit.getServer().getPluginManager().callEvent(EvtPacket);
+                final EvtPacket EvtPacket = new EvtPacket(player, new PacketWrapper(packet));
+
+                Bukkit.getScheduler().runTask(Skellett.plugin, () -> Bukkit.getServer().getPluginManager().callEvent(EvtPacket));
                 if (EvtPacket.isCancelled()) {
                     return;
                 }
@@ -55,8 +56,9 @@ public class PacketListener implements Listener {
 
             @Override
             public void write(ChannelHandlerContext context, Object packet, ChannelPromise channelPromise) throws Exception {
-                EvtPacket EvtPacket = new EvtPacket(player, new PacketWrapper(packet));
-                Bukkit.getServer().getPluginManager().callEvent(EvtPacket);
+                final EvtPacket EvtPacket = new EvtPacket(player, new PacketWrapper(packet));
+
+                Bukkit.getScheduler().runTask(Skellett.plugin, () -> Bukkit.getServer().getPluginManager().callEvent(EvtPacket));
                 if (EvtPacket.isCancelled()) {
                     return;
                 }
