@@ -51,8 +51,6 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
-import protocolsupport.api.ProtocolVersion;
-import protocolsupport.api.remapper.BlockRemapperControl.MaterialAndData;
 
 import javax.annotation.Nullable;
 import java.sql.ResultSet;
@@ -765,58 +763,6 @@ public class Register {
                         return ".+";
                     }
                 }));
-        if (Skellett.instance.getConfig().getBoolean("PluginHooks.ProtocolSupport")) {
-            if (Bukkit.getPluginManager().getPlugin("ProtocolSupport") != null) {
-                Classes.registerClass(new ClassInfo<ProtocolVersion>(ProtocolVersion.class, "protocolversion")
-                        .name("protocol version")
-                        .description("A getter for protocol support's version")
-                        .parser(new Parser<ProtocolVersion>() {
-                            @Override
-                            @Nullable
-                            public ProtocolVersion parse(String ver, ParseContext context) {
-                                return null;
-                            }
-
-                            @Override
-                            public String toString(ProtocolVersion v, int flags) {
-                                return v.toString();
-                            }
-
-                            @Override
-                            public String toVariableNameString(ProtocolVersion v) {
-                                return v.toString();
-                            }
-
-                            public String getVariableNamePattern() {
-                                return ".+";
-                            }
-                        }));
-                Classes.registerClass(new ClassInfo<MaterialAndData>(MaterialAndData.class, "materialanddata")
-                        .name("material and data")
-                        .description("A getter for protocol support's material and data")
-                        .parser(new Parser<MaterialAndData>() {
-                            @Override
-                            @Nullable
-                            public MaterialAndData parse(String md, ParseContext context) {
-                                return null;
-                            }
-
-                            @Override
-                            public String toString(MaterialAndData md, int flags) {
-                                return md.toString();
-                            }
-
-                            @Override
-                            public String toVariableNameString(MaterialAndData md) {
-                                return md.toString();
-                            }
-
-                            public String getVariableNamePattern() {
-                                return ".+";
-                            }
-                        }));
-            }
-        }
         if (Skellett.syntaxToggleData.getBoolean("Syntax.Effects.Particles")) {
             if (!Bukkit.getServer().getVersion().contains("MC: 1.6") && !Bukkit.getServer().getVersion().contains("MC: 1.7") && !Bukkit.getServer().getVersion().contains("MC: 1.8")) {
                 if (Classes.getExactClassInfo(Particle.class) == null) {

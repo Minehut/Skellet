@@ -49,12 +49,6 @@ PluginHooks:
 
   LibsDisguises: false
 
-# If you use ProtocolSupport https://www.spigotmc.org/resources/protocolsupport.7201
-  ProtocolSupport: false
-  
-# If you use SquidHQ http://squidhq.com/
-  SquidHQ: false
-
 # If you use Citizens https://www.spigotmc.org/resources/citizens.13811/
   Npc: false
 

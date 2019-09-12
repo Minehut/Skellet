@@ -14,10 +14,6 @@ import com.gmail.thelimeglass.Conditions.CondIsWhitelisted;
 import com.gmail.thelimeglass.Effects.EffFirework;
 import com.gmail.thelimeglass.Maps.SkellettMapRenderer;
 import com.gmail.thelimeglass.MySQL.*;
-import com.gmail.thelimeglass.ProtocolSupport.ExprBlockRemapperItemType;
-import com.gmail.thelimeglass.ProtocolSupport.ExprItemRemapperID;
-import com.gmail.thelimeglass.ProtocolSupport.ExprItemRemapperItemType;
-import com.gmail.thelimeglass.ProtocolSupport.ExprProtocolVersion;
 import com.gmail.thelimeglass.Scoreboards.*;
 import com.gmail.thelimeglass.Stylishboards.StyleManager;
 import com.gmail.thelimeglass.Utils.Annotations.*;
@@ -44,8 +40,6 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
-import protocolsupport.api.ProtocolVersion;
-import protocolsupport.api.remapper.BlockRemapperControl;
 
 import java.io.File;
 import java.io.IOException;
@@ -231,14 +225,6 @@ public class Skellett extends JavaPlugin {
             Skript.registerCondition(CondTeamHasEntry.class, "[the] (score[ ][board]|[skellett[ ]]board) (1�(ha(s|ve)|contain[s])|2�(do[es](n't| not) have| do[es](n't| not) contain)) [the] [entry] %string% [(in|within)] the [team] %team%");
             Skript.registerEffect(EffTeamRemoveEntry.class, "[(score[ ][board]|[skellett[ ]]board)] remove [the] entry [(from|of)] %string% from [the] [team] %team%");
             Skript.registerEffect(EffUnregisterTeam.class, "unregister [the] (score[ ][board]|[skellett[ ]]board) team %team%");
-        }
-        if (config.getBoolean("PluginHooks.ProtocolSupport")) {
-            if (Bukkit.getPluginManager().getPlugin("ProtocolSupport") != null) {
-                Skript.registerExpression(ExprBlockRemapperItemType.class, BlockRemapperControl.MaterialAndData.class, ExpressionType.SIMPLE, "[protocol[ ]support] remap[ped] block [of] %itemtype%(:| (with|and) data )%number% (for|of) [protocol] version %protocolversion%");
-                Skript.registerExpression(ExprItemRemapperItemType.class, ItemType.class, ExpressionType.SIMPLE, "[protocol[ ]support] remap[ped] item [of] %itemtype% (for|of) [protocol] version %protocolversion%");
-                Skript.registerExpression(ExprItemRemapperID.class, Number.class, ExpressionType.SIMPLE, "[protocol[ ]support] remap[ped] item [of] [ID] %number% (for|of) [protocol] version %protocolversion%");
-                Skript.registerExpression(ExprProtocolVersion.class, ProtocolVersion.class, ExpressionType.SIMPLE, "[skellett] protocol[ ][support] version of %player%", "[skellett] %player%'s protocol[ ][support] version");
-            }
         }
         if (mysqlData.getBoolean("MySQL")) {
             Skript.registerEffect(EffMySQLConnect.class, "[skellett] connect [to] mysql");
