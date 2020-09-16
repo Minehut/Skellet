@@ -10,6 +10,7 @@ configurations {
 }
 
 repositories {
+	mavenLocal()
 	mavenCentral()
 	jcenter()
 
@@ -47,16 +48,16 @@ dependencies {
 	// Citizens
 	implementation (group: 'net.citizensnpcs', name: 'citizensapi', version: '2.0.24-SNAPSHOT')
 
-	// ProtocolSupport
-	implementation (group: 'com.github.ProtocolSupport', name: 'ProtocolSupport', version: 'master-SNAPSHOT')
-
 	//Nullable annotation
 	implementation (group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.annotation', version: '1.1.0')
 
 	//Skript
-	implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.4-alpha1') {
+	implementation (group: 'com.github.SkriptLang', name: 'Skript', version: '2.5-beta2') {
 		transitive = false
 	}
+
+	// CorpseReborn
+	implementation (group: 'org.golde.bukkit.corpsereborn', name: 'CorpseReborn', version: '2.14.0')
 
 	// LibsDisguises
 	implementation (group: 'com.github.libraryaddict', name: 'LibsDisguises', version: 'master-SNAPSHOT')
