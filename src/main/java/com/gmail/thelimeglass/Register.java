@@ -801,7 +801,5 @@ public class Register {
 
 	public static void metrics(Metrics metrics) {
 		metrics.addCustomChart(new Metrics.SimplePie("skript_version", () -> Skript.getVersion().toString()));
-		metrics.addCustomChart(new Metrics.SimplePie("using_customevents", () -> Skellett.ceData.getBoolean("CustomEvents", false) ? "true" : "false"));
-		metrics.addCustomChart(new Metrics.SingleLineChart("player_database", () -> Bukkit.getOfflinePlayers().length));
 	}
 }
